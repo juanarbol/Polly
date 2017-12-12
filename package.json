@@ -1,0 +1,41 @@
+{
+  "name": "polly",
+  "version": "1.0.0",
+  "description": "Manage your academic life",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha",
+    "lint": "standard",
+    "dev": "webpack-dev-server --inline --hot"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/juanarbol/polly.git"
+  },
+  "keywords": [
+    "academic",
+    "university",
+    "notes"
+  ],
+  "author": "Juan José Arboleda <soyjuanarbol@gmail.com> (https://juanarbol.github.io/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/juanarbol/polly/issues"
+  },
+  "homepage": "https://github.com/juanarbol/polly#readme",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "html-webpack-plugin": "^2.30.1",
+    "standard": "^10.0.3",
+    "uglifyjs-webpack-plugin": "^1.1.2",
+    "webpack": "^3.10.0",
+    "webpack-dev-server": "^2.9.7"
+  },
+  "dependencies": {
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
+  }
+}
