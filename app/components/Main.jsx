@@ -7,9 +7,9 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom'
 
-import NotesContainer from './NotesContainer.jsx'
-import NotesInput from './NotesInput.jsx'
-import Result from './Result.jsx'
+import NotesContainer from './notes/NotesContainer.jsx'
+import NotesInput from './notes/NotesInput.jsx'
+import Result from './notes/Result.jsx'
 
 export default class Main extends Component {
   constructor () {
