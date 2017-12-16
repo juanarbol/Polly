@@ -27,8 +27,8 @@ export default class Main extends Component {
     // we need to save average of notes objects
     this.state = {
       notes: [],
-      average: '',
-      currentPercent: '',
+      average: 0,
+      currentPercent: 0,
       config: defaultConfig
     }
 
