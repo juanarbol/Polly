@@ -85,13 +85,14 @@ export default class Main extends Component {
   }
 
   render () {
+    let config = this.state.config
     let notes = this.state.notes
     let average = this.state.average
     let currentPercent = this.state.currentPercent
     return (
       <div>
         <NotesContainer onUndoNote={this._undoThis} >{notes}</NotesContainer>
-        <NotesInput onNewNote={this._appendThis} currentPercent={currentPercent} />
+        <NotesInput onNewNote={this._appendThis} currentPercent={currentPercent} config={config} />
         <Result>{average}</Result>
       </div>
     )

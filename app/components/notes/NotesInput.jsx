@@ -93,6 +93,8 @@ export default class NotesInput extends Component {
     let note = this.state.note
     let percentage = this.state.percentage
     let anyInputEmpty = this._anyInputEmpty
+    let minNote = this.props.config.lowestNote
+    let maxNote = this.props.config.higherNote
     return (
       <form onSubmit={this._handleSubmit}>
         <fieldset disabled={this._disableForm()} >
@@ -101,7 +103,8 @@ export default class NotesInput extends Component {
             <input type='number'
               value={note}
               onChange={event => this._handleChangeOf('note', event.target.value)}
-              min='0'
+              min={minNote}
+              max={maxNote}
               step='0.1'
             />
             Percentage:
