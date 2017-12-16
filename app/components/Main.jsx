@@ -39,6 +39,12 @@ export default class Main extends Component {
     this._undoThis = this._undoThis.bind(this)
   }
 
+  /**
+   * This methond handle when the config
+   * is chaged by ConfigPanel component
+   * @param {string} inputName atribute of config changed
+   * @param {string} newValue new value of atribuite
+   */
   _changeConfig (inputName, newValue) {
     let config = {
       ...this.state.config,
