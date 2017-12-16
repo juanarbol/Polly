@@ -93,7 +93,7 @@ export default class Main extends Component {
       <div>
         <NotesContainer onUndoNote={this._undoThis} >{notes}</NotesContainer>
         <NotesInput onNewNote={this._appendThis} currentPercent={currentPercent} config={config} />
-        <Result config={config} >{average}</Result>
+        <Result config={config} average={average} percentage={currentPercent} />
       </div>
     )
   }
