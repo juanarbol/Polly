@@ -36,7 +36,7 @@ export default class NotesInput extends Component {
           Note:
           <input type='number' value={note} onChange={event => this._handleChangeOf('note', event.target.value)} min='0' step='0.1' />
           Percentage:
-          <input type='number' value={percentage} onChange={event => this._handleChangeOf('percentage', event.target.value)} min='0'step='5' />
+          <input type='number' value={percentage} onChange={event => this._handleChangeOf('percentage', event.target.value)} min='0'step='1' />
         </label>
         <input type='submit' value='Submit' />
       </form>
