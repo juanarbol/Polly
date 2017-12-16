@@ -25,6 +25,7 @@ export default class Main extends Component {
 
     this._appendThis = this._appendThis.bind(this)
     this._calculateAverageOf = this._calculateAverageOf.bind(this)
+    this._undoThis = this._undoThis.bind(this)
   }
 
   /**
@@ -35,6 +36,22 @@ export default class Main extends Component {
    */
   _appendThis (newNote) {
     let notes = [...this.state.notes, newNote]
+    this.setState({ notes })
+    this._calculateAverageOf(notes)
+  }
+
+  /**
+   * Remove a note from list
+   * @param {number} noteIndex Index of note to remove from list
+   * We change note state and recalculate average for a new rendering
+   * and update components
+   */
+  _undoThis (noteIndex) {
+    let notes = [
+      ...this.state.notes.slice(0, noteIndex),
+      ...this.state.notes.slice(noteIndex + 1)
+    ]
+
     this.setState({ notes })
     this._calculateAverageOf(notes)
   }
@@ -64,7 +81,7 @@ export default class Main extends Component {
     let currentPercent = this.state.currentPercent
     return (
       <div>
-        <NotesContainer>{notes}</NotesContainer>
+        <NotesContainer onUndoNote={this._undoThis} >{notes}</NotesContainer>
         <NotesInput onNewNote={this._appendThis} currentPercent={currentPercent} />
         <Result>{average}</Result>
       </div>
