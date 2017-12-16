@@ -20,6 +20,7 @@ export default class NotesInput extends Component {
     this._handleSubmit = this._handleSubmit.bind(this)
     this._handleChangeOf = this._handleChangeOf.bind(this)
     this._maxPercent = this._maxPercent.bind(this)
+    this._anyInputEmpty = this._anyInputEmpty.bind(this)
     this._disableForm = this._disableForm.bind(this)
   }
 
@@ -67,6 +68,17 @@ export default class NotesInput extends Component {
   }
 
   /**
+   * Return boolean that tell us if there's an
+   * empty input
+   * @param {number} noteInput value of noteInput
+   * @param {number} percentageInput value of percantageInput
+   * @returns {boolean}
+   */
+  _anyInputEmpty (noteInput, percentageInput) {
+    return noteInput.length === 0 || percentageInput.length === 0
+  }
+
+  /**
    * Returns a boolean that tell us if the fieldset should be disabled
    * @method _disableForm() Disable the fieldset when 100% of
    * notes is complete
@@ -80,6 +92,7 @@ export default class NotesInput extends Component {
   render () {
     let note = this.state.note
     let percentage = this.state.percentage
+    let anyInputEmpty = this._anyInputEmpty
     return (
       <form onSubmit={this._handleSubmit}>
         <fieldset disabled={this._disableForm()} >
@@ -100,7 +113,7 @@ export default class NotesInput extends Component {
               step='1'
             />
           </label>
-          <input type='submit' value='Submit' />
+          <input type='submit' value='Submit' disabled={anyInputEmpty(note, percentage)} />
         </fieldset>
       </form>
     )
