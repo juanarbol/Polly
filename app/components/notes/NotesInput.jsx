@@ -105,7 +105,7 @@ export default class NotesInput extends Component {
               onChange={event => this._handleChangeOf('note', event.target.value)}
               min={minNote}
               max={maxNote}
-              step='0.1'
+              step='0.01'
             />
             Percentage:
             <input type='number'
