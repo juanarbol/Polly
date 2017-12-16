@@ -19,7 +19,8 @@ export default class Main extends Component {
     // we need to save average of notes objects
     this.state = {
       notes: [],
-      average: ''
+      average: '',
+      currentPercent: ''
     }
 
     this._appendThis = this._appendThis.bind(this)
@@ -45,23 +46,26 @@ export default class Main extends Component {
    */
   _calculateAverageOf (notes) {
     let average = 0
+    let currentPercent = 0
     notes.map(noteObject => {
       let noteValue = parseFloat(noteObject.note)
       let notePercentage = parseFloat(noteObject.percentage / 100)
 
       average += (noteValue * notePercentage)
+      currentPercent += notePercentage * 100
     })
 
-    this.setState({ average })
+    this.setState({ average, currentPercent })
   }
 
   render () {
     let notes = this.state.notes
     let average = this.state.average
+    let currentPercent = this.state.currentPercent
     return (
       <div>
         <NotesContainer>{notes}</NotesContainer>
-        <NotesInput onNewNote={this._appendThis} />
+        <NotesInput onNewNote={this._appendThis} currentPercent={currentPercent} />
         <Result>{average}</Result>
       </div>
     )
