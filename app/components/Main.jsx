@@ -10,6 +10,7 @@ import { render } from 'react-dom'
 import NotesContainer from './notes/NotesContainer.jsx'
 import NotesInput from './notes/NotesInput.jsx'
 import Result from './notes/Result.jsx'
+import ConfigPanel from './notes/ConfigPanel.jsx'
 
 export default class Main extends Component {
   constructor () {
@@ -32,9 +33,19 @@ export default class Main extends Component {
       config: defaultConfig
     }
 
+    this._changeConfig = this._changeConfig.bind(this)
     this._appendThis = this._appendThis.bind(this)
     this._calculateAverageOf = this._calculateAverageOf.bind(this)
     this._undoThis = this._undoThis.bind(this)
+  }
+
+  _changeConfig (inputName, newValue) {
+    let config = {
+      ...this.state.config,
+      [inputName]: newValue
+    }
+
+    this.setState({ config })
   }
 
   /**
@@ -94,6 +105,7 @@ export default class Main extends Component {
         <NotesContainer onUndoNote={this._undoThis} >{notes}</NotesContainer>
         <NotesInput onNewNote={this._appendThis} currentPercent={currentPercent} config={config} />
         <Result config={config} average={average} percentage={currentPercent} />
+        <ConfigPanel config={config} onNewConfig={this._changeConfig} />
       </div>
     )
   }
