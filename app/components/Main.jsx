@@ -15,12 +15,21 @@ export default class Main extends Component {
   constructor () {
     super()
 
+    // Default values for Colombian education
+    // (most regular cases, this could change in some institutions)
+    const defaultConfig = {
+      lowestNote: 0,
+      higherNote: 5,
+      noteToPass: 3,
+      wishedNote: 3
+    }
     // The state will be lifted by child components
     // we need to save average of notes objects
     this.state = {
       notes: [],
       average: '',
-      currentPercent: ''
+      currentPercent: '',
+      config: defaultConfig
     }
 
     this._appendThis = this._appendThis.bind(this)
