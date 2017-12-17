@@ -7,6 +7,7 @@ export default class Result extends Component {
     this._calculateMissingNote = this._calculateMissingNote.bind(this)
     this._calculateMissingPercentageOf = this._calculateMissingPercentageOf.bind(this)
     this._isPossibleGet = this._isPossibleGet.bind(this)
+    this._isNoteNeededWith = this._isNoteNeededWith.bind(this)
   }
 
   /**
@@ -37,6 +38,19 @@ export default class Result extends Component {
     } else {
       return (100 - currentPercentage) / 100
     }
+  }
+
+  /**
+   * This method tells users if they actually needs a note to pass
+   * @param {number} wishedNote the note wanted
+   * @returns {boolean}
+   */
+  _isNoteNeededWith (wishedNote) {
+    if (this._calculateMissingNote(wishedNote) <= 0) {
+      return false
+    }
+
+    return true
   }
 
   /**

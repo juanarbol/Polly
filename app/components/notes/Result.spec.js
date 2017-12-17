@@ -49,6 +49,20 @@ describe('<Result />', () => {
     expect(wrapper.instance()._isPossibleGet(5, 5)).not.toEqual(true)
   })
 
+  it('Should say if users need a note to pass course', () => {
+    const defaultConfig = {
+      lowestNote: 0,
+      higherNote: 5,
+      noteToPass: 3,
+      wishedNote: 3
+    }
+    const wrapper = shallow(<Result config={defaultConfig} average={2.5} percentage={50} />)
+
+    expect(wrapper.instance()._isNoteNeededWith(3)).toEqual(true)
+    wrapper.setProps({ average: 3, percentage: 70 })
+    expect(wrapper.instance()._isNoteNeededWith(3)).toEqual(false)
+  })
+
   it('Should render a calculus', () => {
     // I do not know what to test here
     // it supose to be the method _renderCalculus
