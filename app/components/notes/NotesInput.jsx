@@ -85,7 +85,7 @@ export default class NotesInput extends Component {
    * @returns {boolean}
    */
   _disableForm () {
-    let totalPercent = this.props.currentPercent
+    let totalPercent = Number(this.props.currentPercent)
     return totalPercent === 100
   }
 
