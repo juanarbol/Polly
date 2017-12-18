@@ -82,11 +82,17 @@ describe('<NotesInput />', () => {
   })
 
   it('Should call _handleSubmit on submit form', () => {
-    const wrapper = shallow(<NotesInput config={{lowestNote:5, higherNote: 15}} currentPercent="60" />)
+    const wrapper = shallow(<NotesInput config={{lowestNote:5, higherNote: 15}} onNewNote={() => false } currentPercent="60" />)
     const spy = jest.spyOn(wrapper.instance(), '_handleSubmit')
+    wrapper.find('form').first().simulate('submit', { preventDefault: () => false })
+    
+    expect(spy).toHaveBeenCalled()
+  })
+
+  it('Should reset state on on submit form', () => {
+    const wrapper = shallow(<NotesInput config={{lowestNote:5, higherNote: 15}} onNewNote={() => false } currentPercent="60" />)
     wrapper.find('form').simulate('submit', { preventDefault() {} })
 
-    expect(spy).toHaveBeenCalled()
-    expect(wrapper.state).toEqual({ note: '', percentage: '' })
+    expect(wrapper.state()).toEqual({ note: '', percentage: '' })
   })
 })
