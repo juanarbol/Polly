@@ -7,6 +7,9 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom'
 
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import AppBar from 'material-ui/AppBar'
+
 import NotesContainer from './notes/NotesContainer.jsx'
 import NotesInput from './notes/NotesInput.jsx'
 import Result from './notes/Result.jsx'
@@ -102,17 +105,21 @@ export default class Main extends Component {
   }
 
   render () {
+    require('./main-style.scss')
     let config = this.state.config
     let notes = this.state.notes
     let average = this.state.average
     let currentPercent = this.state.currentPercent
     return (
-      <div>
+      <MuiThemeProvider>
+        <AppBar
+          title='Polly'
+        />
         <NotesContainer onUndoNote={this._undoThis} >{notes}</NotesContainer>
         <NotesInput onNewNote={this._appendThis} currentPercent={currentPercent} config={config} />
         <Result config={config} average={average} percentage={currentPercent} />
         <ConfigPanel config={config} onNewConfig={this._changeConfig} />
-      </div>
+      </MuiThemeProvider>
     )
   }
 }
