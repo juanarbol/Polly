@@ -9,6 +9,7 @@ import { render } from 'react-dom'
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import AppBar from 'material-ui/AppBar'
+import Paper from 'material-ui/Paper'
 
 import NotesContainer from './notes/NotesContainer.jsx'
 import NotesInput from './notes/NotesInput.jsx'
@@ -30,6 +31,7 @@ export default class Main extends Component {
     // The state will be lifted by child components
     // we need to save average of notes objects
     this.state = {
+      menuOpen: false,
       notes: [],
       average: 0,
       currentPercent: 0,
@@ -40,6 +42,7 @@ export default class Main extends Component {
     this._appendThis = this._appendThis.bind(this)
     this._calculateAverageOf = this._calculateAverageOf.bind(this)
     this._undoThis = this._undoThis.bind(this)
+    this._handleMenuOpen = this._handleMenuOpen.bind(this)
   }
 
   /**
@@ -48,13 +51,12 @@ export default class Main extends Component {
    * @param {string} inputName atribute of config changed
    * @param {string} newValue new value of atribuite
    */
-  _changeConfig (inputName, newValue) {
+  _changeConfig (newConfig) {
     let config = {
-      ...this.state.config,
-      [inputName]: newValue
+      ...newConfig
     }
 
-    this.setState({ config })
+    this.setState({ config, menuOpen: false })
   }
 
   /**
@@ -104,21 +106,48 @@ export default class Main extends Component {
     this.setState({ average, currentPercent })
   }
 
+  /**
+   * This method will open/close drawer when
+   * User clicks on hamburger appBar icon
+   */
+  _handleMenuOpen () {
+    this.setState(prevState => {
+      return { menuOpen: !prevState.menuOpen }
+    })
+  }
+
   render () {
     require('./main-style.scss')
     let config = this.state.config
     let notes = this.state.notes
     let average = this.state.average
     let currentPercent = this.state.currentPercent
+    let menuOpen = this.state.menuOpen
+
+    const menuToggle = this._handleMenuOpen
+
+    const style = {
+      display: 'inline-block'
+    }
     return (
       <MuiThemeProvider>
         <AppBar
           title='Polly'
+          onLeftIconButtonClick={menuToggle}
         />
-        <NotesContainer onUndoNote={this._undoThis} >{notes}</NotesContainer>
-        <NotesInput onNewNote={this._appendThis} currentPercent={currentPercent} config={config} />
-        <Result config={config} average={average} percentage={currentPercent} />
-        <ConfigPanel config={config} onNewConfig={this._changeConfig} />
+        <Paper zDepth={1} style={style}>
+          <NotesInput onNewNote={this._appendThis} currentPercent={currentPercent} config={config} />
+          <Result config={config} average={average} percentage={currentPercent} />
+        </Paper>
+        <Paper zDepth={1} style={style}>
+          <NotesContainer onUndoNote={this._undoThis} >{notes}</NotesContainer>
+        </Paper>
+        <ConfigPanel
+          open={menuOpen}
+          onToggleMenu={menuToggle}
+          config={config}
+          onNewConfig={this._changeConfig}
+        />
       </MuiThemeProvider>
     )
   }
