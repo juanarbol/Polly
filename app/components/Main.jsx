@@ -138,8 +138,6 @@ export default class Main extends Component {
         <Paper zDepth={1} style={style}>
           <NotesInput onNewNote={this._appendThis} currentPercent={currentPercent} config={config} />
           <Result config={config} average={average} percentage={currentPercent} />
-        </Paper>
-        <Paper zDepth={1} style={style}>
           <NotesContainer onUndoNote={this._undoThis} >{notes}</NotesContainer>
         </Paper>
         <ConfigPanel
