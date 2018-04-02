@@ -4,6 +4,7 @@
   "description": "Manage your academic life",
   "main": "index.js",
   "scripts": {
+    "build": "NODE_ENV=production webpack -p",
     "test": "jest",
     "test:watch": "jest --watchAll",
     "lint": "standard",
