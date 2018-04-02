@@ -20,7 +20,8 @@ let webpackConfig = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'Polly'
+      title: 'Polly',
+      template: './app/assets/index.ejs'
     })
   ]
 }
