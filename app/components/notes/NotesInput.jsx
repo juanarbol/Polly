@@ -34,7 +34,7 @@ export default class NotesInput extends Component {
    * then, we notify to parent (<Main />)
    * a new note has been inserted,
    * then, we recalculate the maximun percent for
-   * the new note
+   * the new note, focus the noteInput form value
    * finally we reset inputs values
    */
   _handleSubmit (event) {
@@ -42,6 +42,7 @@ export default class NotesInput extends Component {
 
     let note = this.state.note
     let percentage = this.state.percentage
+    this.noteInput.focus()
 
     this.props.onNewNote({ note, percentage })
     this._maxPercent()
