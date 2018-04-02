@@ -126,20 +126,19 @@ export default class Main extends Component {
 
     const menuToggle = this._handleMenuOpen
 
-    const style = {
-      display: 'inline-block'
-    }
     return (
       <MuiThemeProvider>
         <AppBar
           title='Polly'
           onLeftIconButtonClick={menuToggle}
         />
-        <Paper zDepth={1} style={style}>
-          <NotesInput onNewNote={this._appendThis} currentPercent={currentPercent} config={config} />
-          <Result config={config} average={average} percentage={currentPercent} />
-          <NotesContainer onUndoNote={this._undoThis} >{notes}</NotesContainer>
-        </Paper>
+        <div class='container'>
+          <Paper zDepth={2}>
+            <NotesInput onNewNote={this._appendThis} currentPercent={currentPercent} config={config} />
+            <Result config={config} average={average} percentage={currentPercent} />
+            <NotesContainer onUndoNote={this._undoThis}>{notes}</NotesContainer>
+          </Paper>
+        </div>
         <ConfigPanel
           open={menuOpen}
           onToggleMenu={menuToggle}
@@ -151,4 +150,4 @@ export default class Main extends Component {
   }
 }
 
-render(<Main />, document.querySelector('body'))
+render(<Main />, document.querySelector('.root'))
