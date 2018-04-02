@@ -4,6 +4,9 @@
  * print the inputs for note and percentage
  */
 import React, { Component } from 'react'
+import TextField from 'material-ui/TextField'
+import RaisedButton from 'material-ui/RaisedButton'
+import Done from 'material-ui/svg-icons/action/done'
 
 export default class NotesInput extends Component {
   constructor (props) {
@@ -90,34 +93,47 @@ export default class NotesInput extends Component {
   }
 
   render () {
+    require('./notes-input.scss')
     let note = this.state.note
     let percentage = this.state.percentage
     let anyInputEmpty = this._anyInputEmpty
     let minNote = this.props.config.lowestNote
     let maxNote = this.props.config.higherNote
+
     return (
       <form onSubmit={this._handleSubmit}>
-        <fieldset disabled={this._disableForm()} >
-          <label>
-            Note:
-            <input type='number'
-              value={note}
-              onChange={event => this._handleChangeOf('note', event.target.value)}
-              min={minNote}
-              max={maxNote}
-              step='0.01'
-            />
-            Percentage:
-            <input type='number'
-              value={percentage}
-              onChange={event => this._handleChangeOf('percentage', event.target.value)}
-              max={this._maxPercent()}
-              min='0'
-              step='1'
-            />
-          </label>
-          <input type='submit' value='Submit' disabled={anyInputEmpty(note, percentage)} />
-        </fieldset>
+        <div class='form-container'>
+          <TextField type='number'
+            autoFocus
+            floatingLabelText='Escribe tu nota'
+            value={note}
+            onChange={event => this._handleChangeOf('note', event.target.value)}
+            min={minNote}
+            max={maxNote}
+            step='0.01'
+            disabled={this._disableForm()}
+            ref={(input) => { this.noteInput = input }}
+            className='form-control'
+          />
+          <TextField type='number'
+            floatingLabelText='Escribe el porcentaje de la nota'
+            value={percentage}
+            onChange={event => this._handleChangeOf('percentage', event.target.value)}
+            max={this._maxPercent()}
+            min='0'
+            step='1'
+            disabled={this._disableForm()}
+            className='form-control'
+          />
+          <RaisedButton
+            primary
+            icon={<Done />}
+            type='submit'
+            value='Submit'
+            disabled={anyInputEmpty(note, percentage)}
+            className='form-control'
+          />
+        </div>
       </form>
     )
   }
